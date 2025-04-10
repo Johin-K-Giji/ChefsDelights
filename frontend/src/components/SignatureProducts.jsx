@@ -1,52 +1,76 @@
 import Button from "./Button";
+import {Link} from "react-router-dom"
+import banannaImage from "../images/BanannaP.png";
+
 
 const products = [
   {
     id: 1,
     name: "Carrot Puttupodi",
     price: "₹ 150/500g",
-    image: "/images/carrot.png", // Update with correct path
-    bgColor: "bg-[#E9F5C9]", // Light Green
+    image: banannaImage,
+    bgColor: "bg-[#E9F5C9]",
   },
   {
     id: 2,
     name: "Beetroot Puttupodi",
     price: "₹ 100/500g",
-    image: "/images/beetroot.png", // Update with correct path
-    bgColor: "bg-[#FDE3C8]", // Light Orange
+    image: banannaImage,
+    bgColor: "bg-[#FDE3C8]",
   },
   {
     id: 3,
     name: "Chocolate Puttupodi",
     price: "₹ 200/500g",
-    image: "/images/chocolate.png", // Update with correct path
-    bgColor: "bg-[#FDE3C8]", // Light Orange
+    image: banannaImage,
+    bgColor: "bg-[#FDE3C8]",
   },
 ];
 
 const SignatureProducts = () => {
   return (
-    <div className="py-12 bg-[#FCFAF4] font-instrument">
-      <h2 className="text-center text-2xl font-semibold mb-8">Our Signature</h2>
+    <div className="py-10 bg-[#FCFAF4] font-instrument">
+      <h2 className="text-center text-xl md:text-2xl font-semibold mb-6 md:mb-8">
+        Our Signature
+      </h2>
 
-      {/* Product Grid */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
-        {products.map((product) => (
-          <div key={product.id} className="flex flex-col items-center">
-            <div className={`p-6 ${product.bgColor} rounded-lg flex flex-col items-center`}>
-              <img src={product.image} alt={product.name} className="w-48 h-56 object-contain" />
-              
+      {/* Product Layout: Horizontal on Mobile, Grid on Desktop */}
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex md:grid md:grid-cols-3 gap-6 md:gap-8 overflow-x-auto no-scrollbar no-scrollbar">
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="flex-shrink-0 w-[240px] md:w-auto flex flex-col items-center"
+            >
+              <div
+                className={`p-4 md:p-6 ${product.bgColor} rounded-xl flex flex-col items-center`}
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-32 h-40 md:w-48 md:h-56 object-contain"
+                />
+              </div>
+              <h3 className="mt-3 text-base md:text-xl font-extrabold text-center">
+                {product.name}
+              </h3>
+              <p className="mt-1 text-gray-700 text-sm md:text-base font-bold text-center">
+                {product.price}
+              </p>
             </div>
-            {/* Price Outside the Card */}
-            <h3 className="mt-4 font-medium">{product.name}</h3>
-            <p className="mt-2 text-gray-700 font-medium">{product.price}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {/* View All Products Button */}
+      {/* Button */}
       <div className="flex justify-center mt-8">
-        <Button text="View all Products" width="200px" height="60px" />
+        <Link to="/products">
+        <Button
+          text="View all Products"
+          width="160px"
+          height="50px"
+          className="text-sm"
+        /></Link> 
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 import ProductComponent from "../components/Products";
+import banannaImage from "../images/BanannaP.png";
+import beetrootImage from "../images/BetrootP.png";
 
 const products = [
   {
@@ -10,10 +12,11 @@ const products = [
     description:
       "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable.",
     images: [
-      "https://via.placeholder.com/150/cover-image", // Cover Image
-      "https://via.placeholder.com/150/image1",
-      "https://via.placeholder.com/150/image2",
-      "https://via.placeholder.com/150/image3",
+      banannaImage, // Cover Image
+      beetrootImage,
+      banannaImage
+      ,banannaImage
+      ,beetrootImage
     ],
   },
   {
@@ -23,7 +26,7 @@ const products = [
     description:
       "A healthier alternative with a vibrant color, beetroot puttu powder is rich in nutrients and great in taste.",
     images: [
-      "https://via.placeholder.com/150/cover-image",
+      banannaImage,
       "https://via.placeholder.com/150/image1",
       "https://via.placeholder.com/150/image2",
       "https://via.placeholder.com/150/image3",

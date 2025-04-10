@@ -6,20 +6,24 @@ const ProductComponent = ({ products }) => {
   const [viewMode, setViewMode] = useState("list");
 
   return (
-    <div className="py-16 bg-[#FCFAF4] font-instrument text-center min-h-[600px] flex flex-col justify-center">
-      <h2 className="text-2xl font-semibold mb-10">Our Products</h2>
+    <div className="pt-4 pb-8 px-3 sm:px-6 bg-[#FCFAF4] font-instrument text-center min-h-[600px]">
+      <h2 className="text-2xl font-semibold mb-4">Our Products</h2>
 
       {/* Toggle View Icons */}
       <div className="flex justify-start max-w-6xl mx-auto mb-6">
         <button
           onClick={() => setViewMode("grid")}
-          className={`p-2 mx-2 ${viewMode === "grid" ? "text-blue-600" : "text-gray-600"} text-xl`}
+          className={`p-2 mx-2 ${
+            viewMode === "grid" ? "text-blue-600" : "text-gray-600"
+          } text-xl`}
         >
           <FaThLarge />
         </button>
         <button
           onClick={() => setViewMode("list")}
-          className={`p-2 mx-2 ${viewMode === "list" ? "text-blue-600" : "text-gray-600"} text-xl`}
+          className={`p-2 mx-2 ${
+            viewMode === "list" ? "text-blue-600" : "text-gray-600"
+          } text-xl`}
         >
           <FaList />
         </button>
@@ -28,43 +32,53 @@ const ProductComponent = ({ products }) => {
       {/* Product Display */}
       <div
         className={`w-full mx-auto ${
-          viewMode === "grid" ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" : "flex flex-col items-center gap-6"
+          viewMode === "grid"
+            ? "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 px-1 sm:px-4"
+            : "flex flex-col items-center gap-6 px-2 sm:px-4"
         }`}
       >
         {viewMode === "list"
-          ? products.map((product) => <ListView key={product.id} product={product} />)
-          : products.map((product) => <GridView key={product.id} product={product} />)}
+          ? products.map((product) => (
+              <ListView key={product.id} product={product} />
+            ))
+          : products.map((product) => (
+              <GridView key={product.id} product={product} />
+            ))}
       </div>
     </div>
   );
 };
 
-// List View Component (Same Design)
+// List View
 const ListView = ({ product }) => {
+  const [mainImage, setMainImage] = useState(product.images[0]);
+
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg flex items-center w-[90%] min-h-[450px] mb-12">
-      {/* Product Image */}
-      <div className="w-1/3 flex justify-center">
-        <img src={product.images[0]} alt={product.name} className="w-40 h-auto object-contain" />
+    <div className="bg-white p-4 sm:p-5 rounded-lg shadow flex flex-col sm:flex-row items-center w-full sm:w-[90%] min-h-[350px]">
+      <div className="w-full sm:w-1/3 flex justify-center h-[180px] sm:h-[300px] mb-4 sm:mb-0">
+        <img src={mainImage} alt={product.name} className="h-full object-contain" />
       </div>
 
-      {/* Product Details */}
-      <div className="w-2/3 pl-6 text-left">
-        <h3 className="text-lg font-bold text-orange-600">{product.name}</h3>
-        <p className="text-sm font-semibold text-gray-800">{product.weight}</p>
-        <p className="text-gray-700 mt-2">{product.description}</p>
+      <div className="w-full sm:w-2/3 sm:pl-6 text-left">
+        <h3 className="text-sm sm:text-lg font-bold text-orange-600">{product.name}</h3>
+        <p className="text-sm sm:text-base font-semibold text-gray-800">{product.weight}</p>
+        <p className="text-sm sm:text-base text-gray-700 mt-2">{product.description}</p>
 
-        {/* Additional Images */}
-        <div className="mt-3 flex space-x-2">
+        <div className="mt-3 flex flex-wrap gap-2">
           {product.images.slice(1).map((img, index) => (
-            <img key={index} src={img} alt="Product" className="w-12 h-12 object-cover rounded-md" />
+            <img
+              key={index}
+              src={img}
+              alt="Product"
+              onClick={() => setMainImage(img)}
+              className="w-9 h-9 sm:w-12 sm:h-12 object-cover rounded-md cursor-pointer hover:ring-2 hover:ring-orange-500 transition"
+            />
           ))}
         </div>
 
-        {/* Buttons */}
-        <div className="flex items-center gap-4 mt-4">
-          <Button text="Buy Now" width="80px" height="60px" />
-          <button className="bg-gray-200 p-2 rounded-full text-xl">
+        <div className="flex items-center gap-3 mt-4 flex-wrap">
+          <Button text="Buy Now" width="90px" height="40px" />
+          <button className="bg-gray-200 p-2 rounded-full text-lg hover:bg-gray-300 transition">
             <FaShoppingCart />
           </button>
         </div>
@@ -73,24 +87,25 @@ const ListView = ({ product }) => {
   );
 };
 
-// Grid View Component (Image in White Square, Details Below, Left-Aligned)
+// Grid View
 const GridView = ({ product }) => {
   return (
-    <div className="flex flex-col w-full ml-4">
-      {/* White Box for Image */}
-      <div className="bg-white p-4 rounded-lg shadow-lg w-full h-48 flex justify-center items-center">
-        <img src={product.images[0]} alt={product.name} className="w-40 h-auto object-contain" />
+    <div className="flex flex-col w-full px-1 sm:px-2">
+      <div className="bg-white p-3 rounded-lg shadow w-full h-36 sm:h-44 flex justify-center items-center">
+        <img
+          src={product.images[0]}
+          alt={product.name}
+          className="max-h-full max-w-[80%] object-contain"
+        />
       </div>
 
-      {/* Product Details Below (Left-Aligned) */}
-      <div className="mt-3 text-center">
-        <h3 className="text-lg font-bold text-orange-600">{product.name}</h3>
-        <p className="text-sm font-semibold text-gray-800">{product.weight}</p>
+      <div className="mt-2 text-left sm:text-center px-1">
+        <h3 className="text-xs font-bold text-orange-600 truncate">{product.name}</h3>
+        <p className="text-xs font-semibold text-gray-800">{product.weight}</p>
 
-        {/* Buttons */}
-        <div className="flex gap-4 mt-2 justify-center">
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md">Buy Now</button>
-          <button className="bg-gray-200 p-2 rounded-full text-xl">
+        <div className="flex gap-2 mt-2 justify-start sm:justify-center">
+          <Button text="Buy" width="65px" height="30px" />
+          <button className="bg-gray-200 p-1.5 rounded-full text-sm hover:bg-gray-300 transition">
             <FaShoppingCart />
           </button>
         </div>
