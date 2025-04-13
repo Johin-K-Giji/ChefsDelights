@@ -71,13 +71,14 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden flex flex-col items-center py-6 space-y-4 bg-[#FCFAF4] border-t border-gray-300">
           {location.pathname !== "/" && (
-            <Link
-              to="/"
-              onClick={() => setIsOpen(false)}
-              className="text-gray-800 text-xl hover:text-[#157EE1]"
-            >
-              <FiHome />
-            </Link>
+           <Link
+           to="/"
+           className="flex items-center justify-center p-2 rounded-full hover:bg-gray-200 transition text-gray-800 hover:text-[#157EE1]"
+           title="Go to Home"
+         >
+           <FiHome className="text-xl" />
+         </Link>
+         
           )}
           {navLinks.map((link) => (
             <NavLink
