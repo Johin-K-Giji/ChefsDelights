@@ -23,7 +23,7 @@ const AboutHome = () => {
 
   return (
     <div className="py-16 bg-[#FCFAF4] font-instrument text-center min-h-[600px] flex flex-col justify-center">
-      <h2 className="text-2xl font-semibold mb-10">Why Chef’s Delights</h2>
+      <h2 className="text-center text-xl md:text-2xl font-semibold mt-4 md:mt-8 mb-6 md:mb-8 relative  after:content-[''] after:block after:w-16 after:h-[3px] after:bg-[#157EE1] after:mx-auto after:mt-2">Why Chef’s Delights</h2>
 
       {/* Content Section */}
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10 px-6">
@@ -56,9 +56,16 @@ const AboutHome = () => {
                   className="w-32 h-auto object-contain"
                 />
               </div>
-              <p className="text-white text-sm md:text-base">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s.
+              <p className="text-white text-sm md:text-base leading-relaxed">
+                At Chef’s Delights, we bring you the rich culinary traditions of Kerala in every bite.
+                From our signature <strong>puttu powder</strong> to premium <strong>millets, ginger powder, and chilly powder</strong>,
+                our products are crafted with love and a deep respect for age-old recipes.
+                <br /><br />
+                We focus on serving customers across <strong>India and the GCC</strong>, delivering the true essence of South Indian flavors
+                in a convenient and healthy way.
+                <br /><br />
+                Our foundation rests on four key pillars: <strong>Authenticity</strong>, <strong>Affordability</strong>,
+                <strong>Quality</strong>, and <strong>Natural Ingredients</strong> — making every meal not just tasty but trustworthy.
               </p>
             </>
           )}
@@ -80,9 +87,12 @@ const AboutHome = () => {
           )}
 
           {activeTab === "package" && (
-            <p className="text-white text-sm md:text-base">
-              Our packages include carefully curated ingredients to ensure the best taste and quality.
-            </p>
+            <div className="text-white text-sm md:text-base space-y-4">
+              <p><strong>Authentic:</strong> All our products follow traditional recipes from Kerala, ensuring each pack delivers genuine regional flavor.</p>
+              <p><strong>Affordable:</strong> We believe everyone should have access to healthy, tasty food. Our pricing is fair and inclusive.</p>
+              <p><strong>Quality:</strong> We carefully select high-quality ingredients and maintain strict hygiene standards during production and packaging.</p>
+              <p><strong>Natural:</strong> No artificial preservatives or colors. Just pure, wholesome ingredients you can trust.</p>
+            </div>
           )}
         </div>
       </div>

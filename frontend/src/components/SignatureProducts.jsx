@@ -1,6 +1,8 @@
 import Button from "./Button";
 import {Link} from "react-router-dom"
-import banannaImage from "../images/BanannaP.png";
+import banannaImage from "../images/Bananna.png";
+import beetrootImage from "../images/Beetroot.png";
+import cornImage from "../images/Corn.png";
 
 
 const products = [
@@ -15,14 +17,14 @@ const products = [
     id: 2,
     name: "Beetroot Puttupodi",
     price: "₹ 100/500g",
-    image: banannaImage,
+    image: beetrootImage,
     bgColor: "bg-[#FDE3C8]",
   },
   {
     id: 3,
     name: "Chocolate Puttupodi",
     price: "₹ 200/500g",
-    image: banannaImage,
+    image: cornImage,
     bgColor: "bg-[#FDE3C8]",
   },
 ];
@@ -30,9 +32,10 @@ const products = [
 const SignatureProducts = () => {
   return (
     <div className="py-10 bg-[#FCFAF4] font-instrument">
-      <h2 className="text-center text-xl md:text-2xl font-semibold mb-6 md:mb-8">
-        Our Signature
-      </h2>
+<h2 className="text-center text-xl md:text-2xl font-semibold mt-4 md:mt-8 mb-6 md:mb-8 relative  after:content-[''] after:block after:w-16 after:h-[3px] after:bg-[#157EE1] after:mx-auto after:mt-2">
+  Our Signature
+</h2>
+
 
       {/* Product Layout: Horizontal on Mobile, Grid on Desktop */}
       <div className="max-w-6xl mx-auto px-4">

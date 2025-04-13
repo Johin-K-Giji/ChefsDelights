@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { FaThLarge, FaList, FaShoppingCart } from "react-icons/fa";
 import Button from "./Button";
+import { useCart } from "../context/CartContext";
+import { toast } from 'react-toastify';
+import { Link } from "react-router-dom";
 
 const ProductComponent = ({ products }) => {
+  
   const [viewMode, setViewMode] = useState("list");
+
 
   return (
     <div className="pt-4 pb-8 px-3 sm:px-6 bg-[#FCFAF4] font-instrument text-center min-h-[600px]">
@@ -52,6 +57,7 @@ const ProductComponent = ({ products }) => {
 // List View
 const ListView = ({ product }) => {
   const [mainImage, setMainImage] = useState(product.images[0]);
+  const { addToCart } = useCart();
 
   return (
     <div className="bg-white p-4 sm:p-5 rounded-lg shadow flex flex-col sm:flex-row items-center w-full sm:w-[90%] min-h-[350px]">
@@ -77,10 +83,19 @@ const ListView = ({ product }) => {
         </div>
 
         <div className="flex items-center gap-3 mt-4 flex-wrap">
-          <Button text="Buy Now" width="90px" height="40px" />
-          <button className="bg-gray-200 p-2 rounded-full text-lg hover:bg-gray-300 transition">
-            <FaShoppingCart />
-          </button>
+         <Link to="/checkout"><Button text="Buy Now" width="90px" height="40px" /></Link> 
+          <button
+  className="bg-gray-200 p-2 rounded-full text-lg hover:bg-gray-300 transition"
+  onClick={() => {
+    addToCart(product);
+    toast.success(`${product.name} added to cart! 🛒`, {
+      icon: "🎉"
+    });
+  }}
+>
+  <FaShoppingCart />
+</button>
+
         </div>
       </div>
     </div>
@@ -89,6 +104,7 @@ const ListView = ({ product }) => {
 
 // Grid View
 const GridView = ({ product }) => {
+  const { addToCart } = useCart();
   return (
     <div className="flex flex-col w-full px-1 sm:px-2">
       <div className="bg-white p-3 rounded-lg shadow w-full h-36 sm:h-44 flex justify-center items-center">
@@ -104,10 +120,19 @@ const GridView = ({ product }) => {
         <p className="text-xs font-semibold text-gray-800">{product.weight}</p>
 
         <div className="flex gap-2 mt-2 justify-start sm:justify-center">
-          <Button text="Buy" width="65px" height="30px" />
-          <button className="bg-gray-200 p-1.5 rounded-full text-sm hover:bg-gray-300 transition">
-            <FaShoppingCart />
-          </button>
+        <Link to="/checkout"><Button text="Buy" width="65px" height="30px" /></Link>
+          <button
+  className="bg-gray-200 p-2 rounded-full text-lg hover:bg-gray-300 transition"
+  onClick={() => {
+    addToCart(product);
+    toast.success(`${product.name} added to cart! 🛒`, {
+      icon: "🎉"
+    });
+  }}
+>
+  <FaShoppingCart />
+</button>
+
         </div>
       </div>
     </div>

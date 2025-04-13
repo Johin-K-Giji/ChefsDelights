@@ -7,6 +7,7 @@ import { FiChevronDown } from "react-icons/fi";
 import Button from "./Button";
 import carousel1 from "../images/Carousel1.png";
 import carouselMobile from "../images/Carousel Mobile.png";
+import { Link } from "react-router-dom";
 
 const slides = [
   {
@@ -59,7 +60,7 @@ const Carousel = () => {
 
             {/* ✅ Discover More Button (Only on Desktop) */}
             <div className="hidden md:block absolute left-10 top-[65%] transform -translate-y-1/2 text-left">
-              <Button text="Discover More" width="160px" height="50px" />
+              <Link to="/products"><Button text="Discover More" width="160px" height="50px" /></Link>
             </div>
 
             {/* ✅ Pagination only on desktop */}

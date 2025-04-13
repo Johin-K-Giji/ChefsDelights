@@ -1,23 +1,31 @@
+
+import Authentic from "../images/Authentic.png"
+import Affordable from "../images/Affordable.png"
+import Natural from "../images/Natural.png"
+import Quality from "../images/Quality.png"
+import Logo from "../images/Logo.png";
+
+
 const features = [
     {
       id: 1,
       desc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour",
-      icon: "/images/service1.png", // replace with real path
+      icon: Authentic, // replace with real path
     },
     {
       id: 2,
       desc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration",
-      icon: "/images/service2.png",
+      icon: Affordable,
     },
     {
       id: 3,
       desc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered",
-      icon: "/images/service3.png",
+      icon: Natural,
     },
     {
       id: 4,
       desc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered",
-      icon: "/images/service4.png",
+      icon: Quality,
     },
   ];
   
@@ -29,11 +37,11 @@ const features = [
           <h2 className="text-center text-xl md:text-2xl font-semibold mb-8">Our Journey</h2>
           <div className="flex flex-col md:flex-row items-center gap-10">
             <img
-              src="/images/logo.png" // replace with your actual logo path
+              src={Logo} // replace with your actual logo path
               alt="Chef's Delights Logo"
               className="w-52 object-contain"
             />
-            <div className="bg-white p-6 shadow-md rounded-md max-w-xl text-sm leading-6">
+            <div className="bg-white p-10 shadow-md rounded-md max-w-xl text-sm leading-6">
               <p>
                 There are many variations of passages of Lorem Ipsum available,
                 but the majority have suffered alteration in some form, by injected
@@ -51,22 +59,23 @@ const features = [
   <h2 className="text-center text-xl md:text-2xl font-semibold mb-12">What we Provide</h2>
 
   <div className="max-w-6xl mx-auto px-4">
-    <div className="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center justify-center">
-      {features.map((item) => (
-        <div key={item.id} className="flex sm:flex-col items-center sm:items-center text-left sm:text-center gap-3 sm:gap-0 w-full sm:w-auto">
-          <div className="w-14 h-14 sm:w-20 sm:h-20 bg-gray-300 rounded-full flex items-center justify-center">
-            <img
-              src={item.icon}
-              alt="Service"
-              className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
-            />
-          </div>
-          <p className="text-xs sm:text-sm text-gray-700 max-w-[220px] sm:max-w-none">
-            {item.desc}
-          </p>
-        </div>
-      ))}
+  <div className="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center justify-center">
+  {features.map((item) => (
+    <div key={item.id} className="flex sm:flex-col items-center sm:items-center text-left sm:text-center gap-3 sm:gap-0 w-full sm:w-auto">
+      <div className="w-16 h-16 sm:w-24 sm:h-24 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
+        <img
+          src={item.icon}
+          alt="Service"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <p className="text-xs sm:text-sm text-gray-700 max-w-[220px] sm:max-w-none mt-2 sm:mt-3">
+        {item.desc}
+      </p>
     </div>
+  ))}
+</div>
+
   </div>
 </section>
 

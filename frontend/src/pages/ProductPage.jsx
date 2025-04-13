@@ -1,8 +1,10 @@
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 import ProductComponent from "../components/Products";
-import banannaImage from "../images/BanannaP.png";
-import beetrootImage from "../images/BetrootP.png";
+import banannaImage from "../images/Bananna.png";
+import beetrootImage from "../images/Beetroot.png";
+import carrotImage from "../images/Carrot.png";
+import cornImage from "../images/Corn.png";
 
 const products = [
   {
@@ -26,10 +28,22 @@ const products = [
     description:
       "A healthier alternative with a vibrant color, beetroot puttu powder is rich in nutrients and great in taste.",
     images: [
+      cornImage,
+      beetrootImage,
       banannaImage,
-      "https://via.placeholder.com/150/image1",
-      "https://via.placeholder.com/150/image2",
-      "https://via.placeholder.com/150/image3",
+      banannaImage,
+    ],
+  },{
+    id: 3,
+    name: "BEETROOT PUTTU POWDER",
+    weight: "150/500gm",
+    description:
+      "A healthier alternative with a vibrant color, beetroot puttu powder is rich in nutrients and great in taste.",
+    images: [
+      carrotImage,
+      beetrootImage,
+      banannaImage,
+      banannaImage,
     ],
   },
 ];
