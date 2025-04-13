@@ -4,6 +4,8 @@ import Button from "./Button";
 import { useCart } from "../context/CartContext";
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
+import { FaRupeeSign } from "react-icons/fa";
+
 
 const ProductComponent = ({ products }) => {
   
@@ -66,8 +68,12 @@ const ListView = ({ product }) => {
       </div>
 
       <div className="w-full sm:w-2/3 sm:pl-6 text-left">
-        <h3 className="text-sm sm:text-lg font-bold text-orange-600">{product.name}</h3>
-        <p className="text-sm sm:text-base font-semibold text-gray-800">{product.weight}</p>
+        <h3 className="text-sm sm:text-lg font-bold text-[#DC143C]">{product.name}</h3>
+        <p className="text-sm sm:text-base font-semibold text-gray-800 flex items-center gap-1">
+  <FaRupeeSign className="text-[13px] sm:text-base" />
+  {parseFloat(product.weight).toFixed(2)}
+</p>
+
         <p className="text-sm sm:text-base text-gray-700 mt-2">{product.description}</p>
 
         <div className="mt-3 flex flex-wrap gap-2">
@@ -116,11 +122,15 @@ const GridView = ({ product }) => {
       </div>
 
       <div className="mt-2 text-left sm:text-center px-1">
-        <h3 className="text-xs font-bold text-orange-600 truncate">{product.name}</h3>
-        <p className="text-xs font-semibold text-gray-800">{product.weight}</p>
+        <h3 className="text-xs font-bold text-[#DC143C] truncate">{product.name}</h3>
+        <p className="text-xs font-semibold text-gray-800 flex items-center gap-1 justify-start sm:justify-center">
+  <FaRupeeSign className="text-[11px]" />
+  {parseFloat(product.weight).toFixed(2)}
+</p>
+
 
         <div className="flex gap-2 mt-2 justify-start sm:justify-center">
-        <Link to="/checkout"><Button text="Buy" width="65px" height="30px" /></Link>
+        <Link to="/checkout"><Button text="Buy Now" width="65px" height="30px" textSize="12px"/></Link>
           <button
   className="bg-gray-200 p-2 rounded-full text-lg hover:bg-gray-300 transition"
   onClick={() => {
