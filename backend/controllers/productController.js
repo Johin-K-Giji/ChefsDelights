@@ -3,9 +3,11 @@ const Product = require("../models/Product");
 // Create a new product
 const createProduct = async (req, res) => {
   try {
+    console.log(req.body);  // Log the incoming request body
+    console.log(req.files);  // Log the uploaded files
     const { name, price, description } = req.body;
-    const coverImage = req.files?.coverImage?.[0]?.filename;
-    const subImages = req.files?.subImages?.map(file => file.filename) || [];
+    const coverImage = req.files?.coverImage?.[0]?.filename; // Correct field name
+    const subImages = req.files?.subImages?.map(file => file.filename) || []; // Correct field name
 
     if (!coverImage) {
       return res.status(400).json({ message: "Cover image is required." });
@@ -25,6 +27,8 @@ const createProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 // Get all products
 const getProducts = async (req, res) => {
@@ -48,37 +52,55 @@ const getProductById = async (req, res) => {
 };
 
 // Update a product
-const updateProduct = async (req, res) => {
-  try {
-    const { name, price, description } = req.body;
+const updateProduct = (req, res) => {
+  const { id } = req.params;  // Getting the product id from the URL parameter
+  const { product_name, price_india, price_uae, product_description } = req.body;
+  console.log(req.body);
+  
 
-    const updatedData = {
-      name,
-      price,
-      description,
-    };
+  // Access the files if available
+  const coverImage = req.files?.cover_image ? req.files.cover_image[0] : null;
+  const subImages = req.files?.sub_images ? req.files.sub_images : [];
 
-    if (req.files?.coverImage) {
-      updatedData.coverImage = req.files.coverImage[0].filename;
-    }
+  // Find the product by ID
+  Product.findById(id)
+    .then(product => {
+      if (!product) {
+        return res.status(404).send("Product not found");
+      }
 
-    if (req.files?.subImages) {
-      updatedData.subImages = req.files.subImages.map(file => file.filename);
-    }
+      // Update product details
+      product.name = product_name || product.name;
+      if (!product.price) {
+        product.price = {};
+      }
+      product.price.india = price_india !== undefined ? price_india : product.price.india;
+      product.price.uae = price_uae !== undefined ? price_uae : product.price.uae;
+      
+      product.description = product_description || product.description;
 
-    const updatedProduct = await Product.findByIdAndUpdate(
-      req.params.id,
-      updatedData,
-      { new: true }
-    );
+      // If new cover image is uploaded, update it
+      if (coverImage) {
+        product.coverImage = coverImage.path; // Assuming the path is saved
+      }
 
-    if (!updatedProduct) return res.status(404).json({ message: "Product not found" });
+      // If new sub images are uploaded, update them
+      if (subImages.length > 0) {
+        product.subImages = subImages.map(img => img.path); // Assuming the paths are saved
+      }
 
-    res.status(200).json(updatedProduct);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+      // Save the updated product
+      return product.save();
+    })
+    .then(() => {
+      res.status(200).send("Product updated successfully");
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).send("Error updating product");
+    });
 };
+
 
 // Delete a product
 const deleteProduct = async (req, res) => {

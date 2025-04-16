@@ -42,7 +42,7 @@ const uploadFields = upload.fields([
 router.post("/create", uploadFields, createProduct);
 router.get("/", getProducts);
 router.get("/:id", getProductById);
-router.put("/:id", uploadFields, updateProduct);
-router.delete("/:id", deleteProduct);
+router.put("/edit/:id", uploadFields, updateProduct);
+router.delete("/delete/:id", deleteProduct);
 
 module.exports = router;

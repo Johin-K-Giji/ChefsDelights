@@ -1,18 +1,14 @@
 const mongoose = require("mongoose");
 
-const productSchema = new mongoose.Schema({
+const ProductSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  price: { type: String, required: true },
+  price: {
+    india: { type: Number, required: true },
+    uae: { type: Number, required: true },
+  },
   description: { type: String, required: true },
   coverImage: { type: String, required: true },
-  subImages: {
-    type: [String],
-    validate: [arrayLimit, "{PATH} exceeds the limit of 5"],
-  },
+  subImages: [String],
 }, { timestamps: true });
 
-function arrayLimit(val) {
-  return val.length <= 5;
-}
-
-module.exports = mongoose.model("Product", productSchema);
+module.exports = mongoose.model("Product", ProductSchema);
