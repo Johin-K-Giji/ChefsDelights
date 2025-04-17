@@ -33,17 +33,17 @@ const Navbar = () => {
         <div className="flex md:hidden">
           <div
             onClick={toggleLocation}
-            className="w-20 h-8 bg-gray-300 rounded-full p-[3px] flex items-center cursor-pointer relative transition-all duration-300"
+            className="w-24 h-10 bg-gradient-to-r from-[#6F8EE6] to-[#157EE1] rounded-full p-[3px] flex items-center cursor-pointer relative transition-all duration-300 shadow-lg"
           >
             <div
               className={`absolute top-[3px] left-[3px] h-[22px] w-[42px] bg-white rounded-full shadow-md transform transition-transform duration-300 ${
                 selectedLocation === "uae" ? "translate-x-[calc(100%-3px)]" : ""
               }`}
             />
-            <span className={`z-10 flex-1 text-[10px] font-bold text-center ${selectedLocation === "india" ? "text-[#157EE1]" : "text-gray-600"}`}>
+            <span className={`z-10 flex-1 text-[10px] font-bold text-center ${selectedLocation === "india" ? "text-[#ffffff]" : "text-[#FCFAF4]"}`}>
               IND
             </span>
-            <span className={`z-10 flex-1 text-[10px] font-bold text-center ${selectedLocation === "uae" ? "text-[#157EE1]" : "text-gray-600"}`}>
+            <span className={`z-10 flex-1 text-[10px] font-bold text-center ${selectedLocation === "uae" ? "text-[#ffffff]" : "text-[#FCFAF4]"}`}>
               UAE
             </span>
           </div>
@@ -77,17 +77,17 @@ const Navbar = () => {
           <div className="hidden md:flex">
             <div
               onClick={toggleLocation}
-              className="w-20 h-8 bg-gray-300 rounded-full p-[3px] flex items-center cursor-pointer relative transition-all duration-300"
+              className="w-24 h-10 bg-gradient-to-r from-[#6F8EE6] to-[#157EE1] rounded-full p-[3px] flex items-center cursor-pointer relative transition-all duration-300 shadow-lg"
             >
               <div
                 className={`absolute top-[3px] left-[3px] h-[22px] w-[42px] bg-white rounded-full shadow-md transform transition-transform duration-300 ${
                   selectedLocation === "uae" ? "translate-x-[calc(100%-3px)]" : ""
                 }`}
               />
-              <span className={`z-10 flex-1 text-[10px] font-bold text-center ${selectedLocation === "india" ? "text-[#157EE1]" : "text-gray-600"}`}>
+              <span className={`z-10 flex-1 text-[10px] font-bold text-center ${selectedLocation === "india" ? "text-[#ffffff]" : "text-[#FCFAF4]"}`}>
                 IND
               </span>
-              <span className={`z-10 flex-1 text-[10px] font-bold text-center ${selectedLocation === "uae" ? "text-[#157EE1]" : "text-gray-600"}`}>
+              <span className={`z-10 flex-1 text-[10px] font-bold text-center ${selectedLocation === "uae" ? "text-[#ffffff]" : "text-[#FCFAF4]"}`}>
                 UAE
               </span>
             </div>

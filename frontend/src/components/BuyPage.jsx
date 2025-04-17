@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { FaUser, FaPhone, FaHome } from "react-icons/fa";
-import cornImage from "../images/Corn.png"; // This image can be replaced with dynamic image if needed
 import axios from "axios";
 import Swal from "sweetalert2"; // Import SweetAlert2
 
@@ -9,6 +8,8 @@ const BuyPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const productId = queryParams.get("productId"); // Get the product ID from the URL query parameter
+
+  const [products, setProducts] = useState([]); // Can hold one or multiple products
 
   const [product, setProduct] = useState(null);
   const [form, setForm] = useState({
@@ -23,24 +24,31 @@ const BuyPage = () => {
     pincode: "",
   });
 
-  const totalAmount = product ? product.price.india + 49 : 0; // Default to 0 if no product is fetched
-
   useEffect(() => {
-    const fetchProduct = async () => {
-      if (productId) {
+    const stateProducts = location.state?.products;
+
+    if (stateProducts && Array.isArray(stateProducts)) {
+      setProducts(stateProducts);
+    } else if (productId) {
+      // fetch single product
+      const fetchProduct = async () => {
         try {
           const response = await axios.get(`http://localhost:5000/api/products/${productId}`);
           if (response.data) {
-            setProduct(response.data);
+            setProducts([response.data]); // Wrap in array for consistency
           }
         } catch (error) {
           console.error("Error fetching product:", error?.response?.data || error.message);
         }
-      }
-    };
+      };
+      fetchProduct();
+    }
+  }, [location.state, productId]);
 
-    fetchProduct();
-  }, [productId]);
+
+  const productSubtotal = products.reduce((acc, item) => acc + (item.price?.india || 0), 0);
+  const totalAmount = productSubtotal + 49;
+  
 
   const handleInput = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -187,22 +195,29 @@ const BuyPage = () => {
         <div className="w-full lg:w-1/3">
           <div className="bg-white shadow-md rounded-xl p-4 sm:p-6 sticky top-6">
             <h3 className="text-lg font-semibold mb-3 border-b pb-2">Order Summary</h3>
-            {product ? (
-              <div className="flex gap-4 mb-4">
-                <img src={product.image || cornImage} alt={product.name} className="w-20 h-20 object-contain rounded" />
-                <div>
-                  <h4 className="text-sm font-medium">{product.name}</h4>
-                  <p className="text-xs text-gray-500">Price: ₹{product.price.india}</p>
-                  <p className="text-sm font-semibold mt-1">Subtotal: ₹{product.price.india}</p>
-                </div>
-              </div>
-            ) : (
-              <div>Loading product...</div>
-            )}
+            {products.length > 0 ? (
+  products.map((product, index) => (
+    <div key={index} className="flex gap-4 mb-4">
+      <img
+        src={`http://localhost:5000/static/products/${product.coverImage}`}
+        alt={product.name}
+        className="w-20 h-20 object-contain rounded"
+      />
+      <div>
+        <h4 className="text-sm font-medium">{product.name}</h4>
+        <p className="text-xs text-gray-500">Price: ₹{product.price.india}</p>
+        <p className="text-sm font-semibold mt-1">Subtotal: ₹{product.price.india}</p>
+      </div>
+    </div>
+  ))
+) : (
+  <div>Loading product(s)...</div>
+)}
+
 
             <div className="space-y-3 text-sm">
-              <SummaryRow label="Product Subtotal" value={`₹${product?.price.india || 0}`} />
-              <SummaryRow label="Delivery Charge" value="₹49.00" />
+            <SummaryRow label="Product Subtotal" value={`₹${productSubtotal}`} />
+            <SummaryRow label="Delivery Charge" value="₹49.00" />
               <hr />
               <SummaryRow label="Total Amount" value={`₹${totalAmount}`} bold={true} />
             </div>

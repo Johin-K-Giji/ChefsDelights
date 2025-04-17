@@ -1,8 +1,18 @@
 import { useCart } from "../context/CartContext";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
+import { FaTrash } from "react-icons/fa"; // Import the trash icon
 
 const CartComponent = () => {
   const { cartItems, removeFromCart, clearCart } = useCart();
+  const navigate = useNavigate();
+
+  console.log(cartItems);
+
+  // Handle checkout
+  const handleCheckout = () => {
+    navigate("/checkout", { state: { products: cartItems } });
+  };
 
   return (
     <div className="bg-[#FCFAF4] py-10 px-4 sm:px-8 font-instrument">
@@ -13,28 +23,39 @@ const CartComponent = () => {
       ) : (
         <>
           <div className="space-y-6 max-w-4xl mx-auto">
-            {cartItems.map((item, index) => (
-              <div key={index} className="bg-white p-4 rounded-lg shadow flex flex-col sm:flex-row gap-4">
-                <img src={item.images[0]} alt={item.name} className="w-32 h-32 object-contain rounded" />
-                <div className="flex flex-col justify-between w-full">
-                  <div>
-                    <h3 className="text-lg font-bold text-orange-600">{item.name}</h3>
-                    <p className="text-sm text-gray-800">{item.weight}</p>
-                    <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+            {cartItems.map((item, index) => {
+              const imageUrl = `http://localhost:5000/static/products/${item.coverImage}`;
+
+              return (
+                <div
+                  key={index}
+                  className="bg-white p-4 rounded-lg shadow flex flex-col sm:flex-row gap-4"
+                >
+                  <img
+                    src={imageUrl}
+                    alt={item.name}
+                    className="w-32 h-32 object-contain rounded border"
+                  />
+                  <div className="flex flex-col justify-between w-full">
+                    <div>
+                      <h3 className="text-lg font-bold text-orange-600">{item.name}</h3>
+                      <p className="text-sm text-gray-800 font-medium">₹{item.price?.india}</p>
+                      <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                    </div>
+                    <button
+                      className="text-sm text-red-500 mt-2 hover:underline self-end"
+                      onClick={() => removeFromCart(item._id)} // Remove item based on _id
+                    >
+                      <FaTrash className="inline-block mr-2" /> {/* Trash icon */}
+                    </button>
                   </div>
-                  <button
-                    className="text-sm text-red-500 mt-2 hover:underline self-end"
-                    onClick={() => removeFromCart(item.id)}
-                  >
-                    Remove
-                  </button>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-10 text-center">
-            <Button text="Checkout" width="160px" height="50px" />
+            <Button onClick={handleCheckout} text="Checkout" width="160px" height="50px" />
             <button onClick={clearCart} className="ml-4 text-sm text-red-500 underline">
               Clear Cart
             </button>
