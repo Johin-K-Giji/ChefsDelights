@@ -4,7 +4,10 @@ import Affordable from "../images/Affordable.png"
 import Natural from "../images/Natural.png"
 import Quality from "../images/Quality.png"
 import Logo from "../images/Logo.png";
-
+import Grinding from "../images/Grinding.jpg"
+import Packing from "../images/Packing.png" 
+import Rice from "../images/Rice.png" 
+import Soaking from "../images/Soaking.jpg"
 
 const features = [
     {
@@ -28,6 +31,36 @@ const features = [
       icon: Quality,
     },
   ];
+
+
+  const steps = [
+    {
+      id: 1,
+      title: "Selection of Rice",
+      icon: Rice,
+      desc: "We start with carefully selected, premium quality rice sourced from trusted farms.",
+    },
+    {
+      id: 2,
+      title: "Soaking the Rice",
+      icon: Soaking,
+      desc: "The rice is thoroughly soaked to achieve the right softness for grinding.",
+    },
+    {
+      id: 3,
+      title: "Drying & Grinding",
+      icon: Grinding,
+      desc: "After drying, the rice is finely ground using traditional techniques.",
+    },
+    {
+      id: 4,
+      title: "Sieving & Packaging",
+      icon: Packing,
+      desc: "We sieve the powder for consistency and package it hygienically for delivery.",
+    },
+  ];
+  
+  
   
   const AboutComponent = () => {
     return (
@@ -81,35 +114,52 @@ const features = [
 
 
 {/* How We Provide Section */}
+{/* How We Provide Section */}
 <section className="py-16 bg-[#FCFAF4]">
-  <h2 className="text-center text-xl md:text-2xl font-semibold mb-12">How we Provide</h2>
+  <h2 className="text-center text-xl md:text-2xl font-semibold mb-12">How We Provide</h2>
 
-  <div className="max-w-6xl mx-auto px-4 space-y-12">
-    {[1, 2, 3, 4].map((step, index) => (
-      <div
-        key={step}
-        className={`flex flex-col ${
-          index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'
-        } items-center md:items-start gap-4 md:gap-12`}
-      >
-        {/* Icon Section */}
-        <div className="flex flex-col items-center text-center md:text-left">
-          <div className="text-sm md:text-base text-gray-600 font-medium mb-2">Step {step}</div>
-          <div className="w-16 h-16 md:w-20 md:h-20 bg-gray-300 rounded-full flex items-center justify-center">
-            {/* Optional: Replace with icon */}
-            <span className="text-sm md:text-lg font-semibold">S{step}</span>
-          </div>
+  <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
+    {steps.map((step) => (
+      <div key={step.id} className="flex flex-col items-center text-center">
+        {/* Step Title */}
+        <div className="text-sm md:text-lg text-[#333] font-semibold mb-2">
+          <strong>Step {step.id}: {step.title}</strong>
         </div>
 
-        {/* Description */}
-        <div className="text-center md:text-left max-w-xs md:max-w-md text-sm md:text-base text-gray-700 leading-relaxed">
-          There are many variations of passages of Lorem Ipsum available,
-          but the majority have suffered alteration in some form.
+        {/* Icon */}
+        <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shadow-md flex items-center justify-center mb-4">
+          <img src={step.icon} alt={step.title} className="w-full h-full object-cover" />
         </div>
+
+        {/* SEO-enhanced Description */}
+        <p className="text-sm md:text-base text-gray-700 leading-relaxed max-w-sm">
+          {step.id === 1 && (
+            <>
+              We begin by selecting <strong>premium-grade rice</strong> from reliable farms known for their consistency and natural cultivation practices. This ensures a <strong>high-quality base</strong> for our rice flour products.
+            </>
+          )}
+          {step.id === 2 && (
+            <>
+              The selected rice undergoes a <strong>controlled soaking process</strong> to achieve the ideal texture and softness. This is a crucial step to maintain the <strong>smoothness and authenticity</strong> of the end product.
+            </>
+          )}
+          {step.id === 3 && (
+            <>
+              Once soaked and dried, we use <strong>traditional grinding methods</strong> to preserve the natural aroma and nutritional value, ensuring a <strong>finely milled rice powder</strong> every time.
+            </>
+          )}
+          {step.id === 4 && (
+            <>
+              The final step involves <strong>fine sieving</strong> to remove impurities, followed by <strong>airtight packaging</strong> to retain freshness, hygiene, and <strong>long shelf-life</strong> during delivery.
+            </>
+          )}
+        </p>
       </div>
     ))}
   </div>
 </section>
+
+
 
 
 
