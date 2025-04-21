@@ -11,7 +11,7 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/admin/product-stats')
+    axios.get('https://chefsdelights.onrender.com/api/admin/product-stats')
       .then((res) => {
         setStats(res.data);
       })

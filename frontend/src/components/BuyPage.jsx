@@ -33,7 +33,7 @@ const BuyPage = () => {
       // fetch single product
       const fetchProduct = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/api/products/${productId}`);
+          const response = await axios.get(`https://chefsdelights.onrender.com/api/products/${productId}`);
           if (response.data) {
             setProducts([response.data]); // Wrap in array for consistency
           }
@@ -102,7 +102,7 @@ const BuyPage = () => {
     }
 
     // Create order on backend
-    const orderResponse = await axios.post("http://localhost:5000/api/payment/create-order/", {
+    const orderResponse = await axios.post("https://chefsdelights.onrender.com/api/payment/create-order/", {
       amount: totalAmount * 100, // in paise
     });
 
@@ -118,7 +118,7 @@ const BuyPage = () => {
       order_id,
       handler: async (response) => {
         // Send payment success data to backend
-        const verifyRes = await axios.post("http://localhost:5000/api/payment/verify-payment", {
+        const verifyRes = await axios.post("https://chefsdelights.onrender.com/api/payment/verify-payment", {
           ...response,
           orderDetails: form,
           totalAmount,
@@ -199,7 +199,7 @@ const BuyPage = () => {
   products.map((product, index) => (
     <div key={index} className="flex gap-4 mb-4">
       <img
-        src={`http://localhost:5000/static/products/${product.coverImage}`}
+        src={`https://chefsdelights.onrender.com/static/products/${product.coverImage}`}
         alt={product.name}
         className="w-20 h-20 object-contain rounded"
       />

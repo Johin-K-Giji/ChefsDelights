@@ -46,7 +46,7 @@ const ProductComponent = ({ products }) => {
 
 // List View
 const ListView = ({ product }) => {
-  const [mainImage, setMainImage] = useState(`http://localhost:5000/static/products/${product.coverImage}`);
+  const [mainImage, setMainImage] = useState(`https://chefsdelights.onrender.com/static/products/${product.coverImage}`);
   const { addToCart } = useCart();
 
   return (
@@ -68,9 +68,9 @@ const ListView = ({ product }) => {
           {product.subImages.map((img, index) => (
             <img
               key={index}
-              src={`http://localhost:5000/static/products/${img}`}
+              src={`https://chefsdelights.onrender.com/static/products/${img}`}
               alt={`Sub-image of ${product.name}`}
-              onClick={() => setMainImage(`http://localhost:5000/static/products/${img}`)}
+              onClick={() => setMainImage(`https://chefsdelights.onrender.com/static/products/${img}`)}
               className="w-9 h-9 sm:w-12 sm:h-12 object-cover rounded-md cursor-pointer hover:ring-2 hover:ring-orange-500 transition"
             />
           ))}
@@ -105,7 +105,7 @@ const GridView = ({ product }) => {
     <div className="flex flex-col w-full px-1 sm:px-2">
       <div className="bg-white p-3 rounded-lg shadow w-full h-36 sm:h-44 flex justify-center items-center">
         <img
-          src={`http://localhost:5000/static/products/${product.coverImage}`}
+          src={`https://chefsdelights.onrender.com/static/products/${product.coverImage}`}
           alt={product.name}
           className="max-h-full max-w-[80%] object-contain"
         />

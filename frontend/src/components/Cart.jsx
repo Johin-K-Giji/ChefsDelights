@@ -24,7 +24,7 @@ const CartComponent = () => {
         <>
           <div className="space-y-6 max-w-4xl mx-auto">
             {cartItems.map((item, index) => {
-              const imageUrl = `http://localhost:5000/static/products/${item.coverImage}`;
+              const imageUrl = `https://chefsdelights.onrender.com/static/products/${item.coverImage}`;
 
               return (
                 <div

@@ -12,7 +12,7 @@ const ViewOrders = () => {
   }, []);
 
   const fetchOrders = () => {
-    axios.get('http://localhost:5000/api/orders/getorder')
+    axios.get('https://chefsdelights.onrender.com/api/orders/getorder')
       .then(response => {
         setOrders(response.data); // Assuming the response is an array of orders
       })

@@ -20,7 +20,7 @@ const ViewProducts = () => {
   }, []);
 
   const fetchProducts = () => {
-    axios.get('http://localhost:5000/api/products/')
+    axios.get('https://chefsdelights.onrender.com/api/products/')
       .then(response => {
         if (response.data && response.data.length > 0) {
           setProducts(response.data);
@@ -115,7 +115,7 @@ const ViewProducts = () => {
     });
   
     axios
-      .put(`http://localhost:5000/api/products/edit/${editProduct._id}`, formData)
+      .put(`https://chefsdelights.onrender.com/api/products/edit/${editProduct._id}`, formData)
       .then((response) => {
         console.log('Product updated successfully:', response.data);
         fetchProducts();
@@ -130,7 +130,7 @@ const ViewProducts = () => {
 
   const handleDeleteClick = (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
-      axios.delete(`http://localhost:5000/api/products/delete/${id}`)
+      axios.delete(`https://chefsdelights.onrender.com/api/products/delete/${id}`)
         .then(() => fetchProducts())
         .catch(error => {
           console.error("Error deleting product:", error);
@@ -183,7 +183,7 @@ const ViewProducts = () => {
                   <td className="p-4 text-gray-700">{product.description}</td>
                   <td className="p-4">
                     <img
-                      src={`http://localhost:5000/static/products/${product.coverImage}`}
+                      src={`https://chefsdelights.onrender.com/static/products/${product.coverImage}`}
                       alt="Cover"
                       className="w-12 h-12 object-cover rounded"
                     />
@@ -193,7 +193,7 @@ const ViewProducts = () => {
                       {product.subImages?.map((img, idx) => (
                         <img
                           key={idx}
-                          src={`http://localhost:5000/static/products/${img}`}
+                          src={`https://chefsdelights.onrender.com/static/products/${img}`}
                           alt="Sub"
                           className="w-12 h-12 object-cover rounded mr-2"
                         />
@@ -276,7 +276,7 @@ const ViewProducts = () => {
                 {existingCoverImage && (
                   <div className="flex items-center mt-1">
                     <img
-                      src={`http://localhost:5000/static/products/${existingCoverImage}`}
+                      src={`https://chefsdelights.onrender.com/static/products/${existingCoverImage}`}
                       alt="Current Cover"
                       className="w-12 h-12 object-cover rounded mr-2"
                     />
@@ -306,7 +306,7 @@ const ViewProducts = () => {
                   {existingSubImages.map((img, idx) => (
                     <div key={idx} className="relative mr-2 mb-2">
                       <img
-                        src={`http://localhost:5000/static/products/${img}`}
+                        src={`https://chefsdelights.onrender.com/static/products/${img}`}
                         alt="Sub"
                         className="w-12 h-12 object-cover rounded"
                       />
