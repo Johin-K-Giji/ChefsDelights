@@ -14,7 +14,7 @@ connectDB();
 
 // Enable CORS
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: "https://chefs-delights.vercel.app",
   credentials: true,
 }));
 
