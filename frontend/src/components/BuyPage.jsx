@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { FaUser, FaPhone, FaHome } from "react-icons/fa";
 import axios from "axios";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import Swal from "sweetalert2";
 
 const BuyPage = () => {
   const location = useLocation();
@@ -10,7 +10,7 @@ const BuyPage = () => {
   const productId = queryParams.get("productId"); // Get the product ID from the URL query parameter
 
   const [products, setProducts] = useState([]); // Can hold one or multiple products
-
+  const [productQuantities, setProductQuantities] = useState({}); // Store quantities for each product
   const [product, setProduct] = useState(null);
   const [form, setForm] = useState({
     name: "",
@@ -29,6 +29,12 @@ const BuyPage = () => {
 
     if (stateProducts && Array.isArray(stateProducts)) {
       setProducts(stateProducts);
+      // Initialize quantities to 1 for each product
+      const initialQuantities = stateProducts.reduce((acc, product) => {
+        acc[product.id] = 1; // Assuming product has an 'id' field
+        return acc;
+      }, {});
+      setProductQuantities(initialQuantities);
     } else if (productId) {
       // fetch single product
       const fetchProduct = async () => {
@@ -36,6 +42,7 @@ const BuyPage = () => {
           const response = await axios.get(`https://chefsdelights.onrender.com/api/products/${productId}`);
           if (response.data) {
             setProducts([response.data]); // Wrap in array for consistency
+            setProductQuantities({ [response.data.id]: 1 }); // Set quantity to 1 for the single product
           }
         } catch (error) {
           console.error("Error fetching product:", error?.response?.data || error.message);
@@ -45,10 +52,11 @@ const BuyPage = () => {
     }
   }, [location.state, productId]);
 
-
-  const productSubtotal = products.reduce((acc, item) => acc + (item.price?.india || 0), 0);
+  const productSubtotal = products.reduce((acc, item) => {
+    const quantity = productQuantities[item.id] || 1;
+    return acc + (item.price?.india || 0) * quantity;
+  }, 0);
   const totalAmount = productSubtotal + 49;
-  
 
   const handleInput = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -64,8 +72,16 @@ const BuyPage = () => {
     });
   };
 
+  const handleQuantityChange = (productId, increment) => {
+    setProductQuantities((prevQuantities) => {
+      const updatedQuantities = { ...prevQuantities };
+      const newQuantity = Math.max(1, updatedQuantities[productId] + increment); // Ensure quantity doesn't go below 1
+      updatedQuantities[productId] = newQuantity;
+      return updatedQuantities;
+    });
+  };
+
   const handlePayment = async () => {
-    // Check if all required fields are filled
     const requiredFields = [
       "name",
       "phone",
@@ -76,7 +92,6 @@ const BuyPage = () => {
       "pincode",
     ];
 
-    // Check for missing fields
     const missingFields = requiredFields.filter((field) => !form[field]);
 
     if (missingFields.length > 0) {
@@ -89,7 +104,6 @@ const BuyPage = () => {
       return;
     }
 
-    // Proceed with Razorpay payment flow if all required fields are filled
     const res = await loadRazorpayScript();
     if (!res) {
       Swal.fire({
@@ -101,7 +115,6 @@ const BuyPage = () => {
       return;
     }
 
-    // Create order on backend
     const orderResponse = await axios.post("https://chefsdelights.onrender.com/api/payment/create-order/", {
       amount: totalAmount * 100, // in paise
     });
@@ -109,15 +122,14 @@ const BuyPage = () => {
     const { amount, id: order_id, currency } = orderResponse.data;
 
     const options = {
-      key: "rzp_test_bHWhJgONq3yqhm", // Replace with your Razorpay key
+      key: "rzp_test_bHWhJgONq3yqhm",
       amount,
       currency,
       name: "Chef Delights Products",
       description: "Purchase",
-      image: "/logo.png", // Optional
+      image: "/logo.png",
       order_id,
       handler: async (response) => {
-        // Send payment success data to backend
         const verifyRes = await axios.post("https://chefsdelights.onrender.com/api/payment/verify-payment", {
           ...response,
           orderDetails: form,
@@ -125,7 +137,6 @@ const BuyPage = () => {
         });
 
         if (verifyRes.data.success) {
-
           setForm({
             name: "",
             phone: "",
@@ -138,7 +149,6 @@ const BuyPage = () => {
             pincode: "",
           });
 
-          
           Swal.fire({
             title: "Payment Successful",
             text: "Your payment was successful, and the order has been saved!",
@@ -196,28 +206,42 @@ const BuyPage = () => {
           <div className="bg-white shadow-md rounded-xl p-4 sm:p-6 sticky top-6">
             <h3 className="text-lg font-semibold mb-3 border-b pb-2">Order Summary</h3>
             {products.length > 0 ? (
-  products.map((product, index) => (
-    <div key={index} className="flex gap-4 mb-4">
-      <img
-        src={`https://chefsdelights.onrender.com/static/products/${product.coverImage}`}
-        alt={product.name}
-        className="w-20 h-20 object-contain rounded"
-      />
-      <div>
-        <h4 className="text-sm font-medium">{product.name}</h4>
-        <p className="text-xs text-gray-500">Price: ₹{product.price.india}</p>
-        <p className="text-sm font-semibold mt-1">Subtotal: ₹{product.price.india}</p>
-      </div>
-    </div>
-  ))
-) : (
-  <div>Loading product(s)...</div>
-)}
-
+              products.map((product, index) => (
+                <div key={index} className="flex gap-4 mb-4">
+                  <img
+                    src={`https://chefsdelights.onrender.com/static/products/${product.coverImage}`}
+                    alt={product.name}
+                    className="w-20 h-20 object-contain rounded"
+                  />
+                  <div>
+                    <h4 className="text-sm font-medium">{product.name}</h4>
+                    <p className="text-xs text-gray-500">Price: ₹{product.price.india}</p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <button
+                        onClick={() => handleQuantityChange(product.id, -1)}
+                        className="text-xl font-semibold"
+                      >
+                        -
+                      </button>
+                      <span className="text-sm font-medium">{productQuantities[product.id]}</span>
+                      <button
+                        onClick={() => handleQuantityChange(product.id, 1)}
+                        className="text-xl font-semibold"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <p className="text-sm font-semibold mt-1">Subtotal: ₹{(product.price.india || 0) * (productQuantities[product.id] || 1)}</p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div>Loading product(s)...</div>
+            )}
 
             <div className="space-y-3 text-sm">
-            <SummaryRow label="Product Subtotal" value={`₹${productSubtotal}`} />
-            <SummaryRow label="Delivery Charge" value="₹49.00" />
+              <SummaryRow label="Product Subtotal" value={`₹${productSubtotal}`} />
+              <SummaryRow label="Delivery Charge" value="₹49.00" />
               <hr />
               <SummaryRow label="Total Amount" value={`₹${totalAmount}`} bold={true} />
             </div>
