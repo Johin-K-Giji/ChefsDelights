@@ -32,6 +32,9 @@ const createOrder = async (req, res) => {
     productIds 
   } = req.body;
 
+  console.log(productIds,"idsss");
+  
+
   // Step 1: If payment details provided, verify & save order
   if (razorpay_order_id && razorpay_payment_id && razorpay_signature) {
     const isValid = verifyRazorpaySignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
