@@ -65,7 +65,7 @@ const createOrder = async (req, res) => {
         razorpaySignature: razorpay_signature,
         transactionId: transactionId || razorpay_payment_id,
         paymentMode: paymentMode || "Online",
-        productIds:productIds
+        productIds
       });
 
       await newOrder.save();
