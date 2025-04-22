@@ -121,6 +121,7 @@ const BuyPage = () => {
         // Send payment success data to backend
 
         const productIds = products.map((item) => item._id); // Extract product IDs
+        console.log("Product Id",productIds)
 
         const verifyRes = await axios.post("https://chefsdelights.onrender.com/api/payment/verify-payment", {
           ...response,
