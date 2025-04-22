@@ -30,7 +30,7 @@ const Navbar = () => {
       <div className="relative container mx-auto flex items-center justify-between">
 
         {/* Mobile Left Toggle */}
-        <div className="flex md:hidden">
+        {/* <div className="flex md:hidden">
           <div
             onClick={toggleLocation}
             className="w-24 h-10 bg-gradient-to-r from-[#6F8EE6] to-[#157EE1] rounded-full p-[3px] flex items-center cursor-pointer relative transition-all duration-300 shadow-lg"
@@ -47,7 +47,7 @@ const Navbar = () => {
               UAE
             </span>
           </div>
-        </div>
+        </div> */}
 
         {/* Logo */}
         <img
@@ -74,7 +74,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-4 md:space-x-6 flex-1 justify-end md:order-2">
 
           {/* Desktop Toggle */}
-          <div className="hidden md:flex">
+          {/* <div className="hidden md:flex">
             <div
               onClick={toggleLocation}
               className="w-24 h-10 bg-gradient-to-r from-[#6F8EE6] to-[#157EE1] rounded-full p-[3px] flex items-center cursor-pointer relative transition-all duration-300 shadow-lg"
@@ -91,7 +91,7 @@ const Navbar = () => {
                 UAE
               </span>
             </div>
-          </div>
+          </div> */}
 
           {/* Cart */}
           <Link to="/cart" className="relative">
