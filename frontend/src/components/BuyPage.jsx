@@ -92,6 +92,8 @@ const BuyPage = () => {
       });
       return;
     }
+    
+    console.log("productIds before payment:", productIds);
 
     // Proceed with Razorpay payment flow if all required fields are filled
     const res = await loadRazorpayScript();
@@ -105,8 +107,6 @@ const BuyPage = () => {
       return;
     }
 
-
-    
 
     // Create order on backend
     const orderResponse = await axios.post("https://chefsdelights.onrender.com/api/payment/create-order/", {
