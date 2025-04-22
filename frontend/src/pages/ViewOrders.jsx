@@ -14,7 +14,7 @@ const ViewOrders = () => {
   const fetchOrders = () => {
     axios.get('https://chefsdelights.onrender.com/api/orders/getorder')
       .then(response => {
-        setOrders(response.data); // Assuming the response is an array of orders
+        setOrders(response.data);
       })
       .catch(error => {
         console.error("Error fetching orders:", error);
@@ -50,10 +50,12 @@ const ViewOrders = () => {
               <th className="p-4">Full Name</th>
               <th className="p-4">Phone</th>
               <th className="p-4">Address</th>
+              <th className="p-4">Products</th>
               <th className="p-4">Amount</th>
               <th className="p-4">Payment Mode</th>
               <th className="p-4">Transaction ID</th>
               <th className="p-4">Date</th>
+              <th className="p-4">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -64,17 +66,25 @@ const ViewOrders = () => {
                   <td className="p-4 text-gray-700">{order.userName}</td>
                   <td className="p-4 text-gray-700">{order.phone}</td>
                   <td className="p-4 text-gray-700">{order.address}</td>
+                  <td className="p-4 text-gray-700">
+                    {order.products?.map(product => product.name).join(', ')}
+                  </td>
                   <td className="p-4 text-gray-700">₹{order.orderAmount}</td>
                   <td className="p-4 text-gray-700">{order.paymentMode}</td>
                   <td className="p-4 text-gray-700">{order.transactionId}</td>
                   <td className="p-4 text-gray-700">
                     {new Date(order.createdAt).toLocaleString()}
                   </td>
+                  <td className="p-4">
+                    <button className="bg-green-500 text-white px-4 py-1 rounded-full hover:bg-green-600">
+                      Order Placed
+                    </button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="8" className="p-4 text-center text-gray-500">No orders found.</td>
+                <td colSpan="10" className="p-4 text-center text-gray-500">No orders found.</td>
               </tr>
             )}
           </tbody>
