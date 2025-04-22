@@ -118,11 +118,15 @@ const GridView = ({ product }) => {
   return (
     <div className="flex flex-col w-full px-1 sm:px-2">
       <div className="bg-white p-3 rounded-lg shadow w-full h-36 sm:h-44 flex justify-center items-center">
-        <img
-          src={`https://chefsdelights.onrender.com/static/products/${product.coverImage}`}
-          alt={product.name}
-          className="max-h-full max-w-[80%] object-contain"
-        />
+      <img
+  src={mainImage}
+  alt={product.name}
+  onError={(e) => {
+    e.target.onerror = null; // Prevent infinite loop if fallback fails
+    e.target.src = cornImage;
+  }}
+  className="h-full object-contain"
+/>
       </div>
 
       <div className="mt-2 text-left sm:text-center px-1">
