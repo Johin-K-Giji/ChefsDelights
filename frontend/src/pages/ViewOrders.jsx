@@ -25,6 +25,17 @@ const ViewOrders = () => {
     order.userName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleStatusUpdate = (orderId) => {
+    axios.put('https://chefsdelights.onrender.com/api/orders/update-order', { orderId })
+      .then(response => {
+        console.log(response.data.message);
+        fetchOrders(); // Refresh order list
+      })
+      .catch(error => {
+        console.error("Error updating order status:", error);
+      });
+  };
+
   return (
     <div className="flex bg-gray-100 min-h-screen">
       <Sidebar />
@@ -76,9 +87,17 @@ const ViewOrders = () => {
                     {new Date(order.createdAt).toLocaleString()}
                   </td>
                   <td className="p-4">
-                    <button className="bg-green-500 text-white px-4 py-1 rounded-full hover:bg-green-600">
-                      Order Placed
-                    </button>
+                    {order.status === 1 ? (
+                      <span className="bg-gray-300 text-white px-4 py-1 rounded-full">Completed</span>
+                    ) : (
+                      <button
+                        className="bg-green-500 text-white px-4 py-1 rounded-full hover:bg-green-600"
+                        onClick={() => handleStatusUpdate(order._id)}
+                      >
+                        Order Placed
+                      </button>
+                    )}
+
                   </td>
                 </tr>
               ))

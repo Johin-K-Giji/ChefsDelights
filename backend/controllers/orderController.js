@@ -23,4 +23,29 @@ const getOrders = async (req, res) => {
   }
 };
 
-module.exports = { getOrders };
+const updateOrderStatus = async (req, res) => {
+  const { orderId } = req.body;
+
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(
+      orderId,
+      { status: 1 },
+      { new: true }
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    res.status(200).json({
+      message: "Order status updated",
+      order: updatedOrder,
+    });
+  } catch (err) {
+    console.error("Error updating order:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+module.exports = { getOrders ,updateOrderStatus};

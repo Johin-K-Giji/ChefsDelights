@@ -5,12 +5,16 @@ const orderSchema = new mongoose.Schema({
   phone: String,
   address: String,
   orderAmount: Number,
-  productIds: [String], // <-- Add this line
+  productIds: [String],
   razorpayPaymentId: String,
   razorpayOrderId: String,
   razorpaySignature: String,
   transactionId: String,
   paymentMode: String, // e.g., 'Online', 'COD'
+  status: {
+    type: Number,
+    default: 0, // 0 - Pending, 1 - Completed or Shipped, etc.
+  },
   createdAt: {
     type: Date,
     default: Date.now,
