@@ -26,6 +26,7 @@ const BuyPage = () => {
 
   useEffect(() => {
     const stateProducts = location.state?.products;
+    console.log(products); 
 
     if (stateProducts && Array.isArray(stateProducts)) {
       setProducts(stateProducts);
