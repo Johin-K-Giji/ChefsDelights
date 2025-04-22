@@ -216,21 +216,23 @@ const BuyPage = () => {
                   <div>
                     <h4 className="text-sm font-medium">{product.name}</h4>
                     <p className="text-xs text-gray-500">Price: ₹{product.price.india}</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <button
-                        onClick={() => handleQuantityChange(product.id, -1)}
-                        className="text-xl font-semibold"
-                      >
-                        -
-                      </button>
-                      <span className="text-sm font-medium">{productQuantities[product.id]}</span>
-                      <button
-                        onClick={() => handleQuantityChange(product.id, 1)}
-                        className="text-xl font-semibold"
-                      >
-                        +
-                      </button>
-                    </div>
+                    <div className="flex items-center mt-2">
+        <button
+          className="w-8 h-8 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full flex items-center justify-center text-lg font-bold"
+          onClick={() => updateQuantity(index, -1)}
+        >
+          −
+        </button>
+        <span className="w-10 text-center text-sm font-semibold mx-2 py-1 bg-gray-100 rounded">
+          {product.quantity || 1}
+        </span>
+        <button
+          className="w-8 h-8 bg-[#c1a365] hover:bg-[#b5914c] text-white rounded-full flex items-center justify-center text-lg font-bold"
+          onClick={() => updateQuantity(index, 1)}
+        >
+          +
+        </button>
+      </div>
                     <p className="text-sm font-semibold mt-1">Subtotal: ₹{(product.price.india || 0) * (productQuantities[product.id] || 1)}</p>
                   </div>
                 </div>
