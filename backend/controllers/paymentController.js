@@ -22,7 +22,7 @@ const verifyRazorpaySignature = (orderId, paymentId, signature) => {
 // Create Order or Verify + Save Order
 const createOrder = async (req, res) => {
 
-  console.log(req.body);
+  console.log(req.body,"body");
   
   const {
     amount,
