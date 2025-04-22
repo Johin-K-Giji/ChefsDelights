@@ -129,13 +129,28 @@ const BuyPage = () => {
 
 
         const verifyRes = await axios.post("https://chefsdelights.onrender.com/api/payment/verify-payment", {
-          ...response,
-          orderDetails: form,
-          totalAmount,
-          productIds,
+          razorpayPaymentId: response.razorpay_payment_id,
+          razorpayOrderId: response.razorpay_order_id,
+          razorpaySignature: response.razorpay_signature,
+          orderDetails: {
+            customer: form,
+            productIds,
+            totalAmount,
+          },
         });
 
-        console.log("idss:",productIds);
+        
+
+console.log("Sending to verify-payment:", {
+  razorpayPaymentId: response.razorpay_payment_id,
+  razorpayOrderId: response.razorpay_order_id,
+  razorpaySignature: response.razorpay_signature,
+  orderDetails: {
+    customer: form,
+    productIds,
+    totalAmount,
+  },
+});
         
 
         if (verifyRes.data.success) {
