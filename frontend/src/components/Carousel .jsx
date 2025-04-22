@@ -9,6 +9,8 @@ import BetrootDC from "../images/BetrootDC.png";
 import CarrotDC from "../images/CarrotDC.png";
 import CornDC from "../images/CornDC.png";
 import CornMC from "../images/CornMC.png";
+import CarrotMC from "../images/CarrotMC.png";
+import ChocolateMC from "../images/ChocolateMC.png";
 import { Link } from "react-router-dom";
 
 const slides = [
@@ -16,21 +18,25 @@ const slides = [
     id: 1,
     title: "CARROT",
     subtitle: "Puttupodi",
-    image: BetrootDC,
+    desktopImage: BetrootDC,
+    mobileImage: CarrotMC,
   },
   {
     id: 2,
     title: "RAGI",
     subtitle: "Puttupodi",
-    image: CarrotDC,
+    desktopImage: CarrotDC,
+    mobileImage: ChocolateMC,
   },
   {
     id: 3,
     title: "WHEAT",
     subtitle: "Puttupodi",
-    image: CornDC,
+    desktopImage: CornDC,
+    mobileImage: CornMC,
   },
 ];
+
 
 const Carousel = () => {
   return (
@@ -44,37 +50,41 @@ const Carousel = () => {
       className="w-full relative"
     >
       {slides.map((slide) => (
-        <SwiperSlide key={slide.id}>
-          <div className="relative w-full h-[60vh] md:h-screen flex items-center justify-center pt-6 px-4 md:px-0 md:pt-0 bg-[#FCFAF4]">
-            {/* ✅ Mobile View Image */}
-            <img
-              src={CornMC}
-              alt={slide.title}
-              className="w-full h-full object-cover md:hidden rounded-xl shadow-md"
-            />
+  <SwiperSlide key={slide.id}>
+    <div className="relative w-full h-[60vh] md:h-screen flex items-center justify-center pt-6 px-4 md:px-0 md:pt-0 bg-[#FCFAF4]">
+      
+      {/* Mobile Image */}
+      <img
+        src={slide.mobileImage}
+        alt={slide.title}
+        className="w-full h-full object-cover md:hidden rounded-xl shadow-md"
+      />
 
-            {/* ✅ Desktop Fullscreen Image */}
-            <img
-              src={slide.image}
-              alt={slide.title}
-              className="w-full h-full object-cover hidden md:block"
-            />
+      {/* Desktop Image */}
+      <img
+        src={slide.desktopImage}
+        alt={slide.title}
+        className="w-full h-full object-cover hidden md:block"
+      />
 
-            {/* ✅ Discover More Button (Only on Desktop) */}
-            <div className="hidden md:block absolute left-10 top-[65%] transform -translate-y-1/2 text-left">
-              <Link to="/products"><Button text="Discover More" width="160px" height="50px" /></Link>
-            </div>
+      {/* Button - Only on Desktop */}
+      <div className="hidden md:block absolute left-10 top-[65%] transform -translate-y-1/2 text-left">
+        <Link to="/products">
+          <Button text="Discover More" width="160px" height="50px" />
+        </Link>
+      </div>
 
-            {/* ✅ Pagination only on desktop */}
-            <div className="swiper-pagination absolute bottom-4 left-1/2 transform -translate-x-1/2 hidden md:block"></div>
+      {/* Pagination - Only on Desktop */}
+      <div className="swiper-pagination absolute bottom-4 left-1/2 transform -translate-x-1/2 hidden md:block"></div>
 
-            {/* ✅ Down Arrow only on desktop */}
-            <div className="hidden md:flex absolute bottom-6 left-1/2 transform -translate-x-1/2 w-12 h-12 items-center justify-center rounded-full bg-white bg-opacity-30 border border-white animate-bounce cursor-pointer">
-              <FiChevronDown className="text-white text-2xl" />
-            </div>
-          </div>
-        </SwiperSlide>
-      ))}
+      {/* Down Arrow - Only on Desktop */}
+      <div className="hidden md:flex absolute bottom-6 left-1/2 transform -translate-x-1/2 w-12 h-12 items-center justify-center rounded-full bg-white bg-opacity-30 border border-white animate-bounce cursor-pointer">
+        <FiChevronDown className="text-white text-2xl" />
+      </div>
+    </div>
+  </SwiperSlide>
+))}
+
     </Swiper>
   );
 };
