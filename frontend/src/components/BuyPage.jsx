@@ -219,16 +219,16 @@ const BuyPage = () => {
                     <div className="flex items-center mt-2">
         <button
           className="w-8 h-8 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full flex items-center justify-center text-lg font-bold"
-          onClick={() => updateQuantity(index, -1)}
+          onClick={() => handleQuantityChange(product.id, -1)}
         >
-          −
+          -
         </button>
         <span className="w-10 text-center text-sm font-semibold mx-2 py-1 bg-gray-100 rounded">
           {product.quantity || 1}
         </span>
         <button
           className="w-8 h-8 bg-[#c1a365] hover:bg-[#b5914c] text-white rounded-full flex items-center justify-center text-lg font-bold"
-          onClick={() => updateQuantity(index, 1)}
+          onClick={() => handleQuantityChange(product.id, 1)}
         >
           +
         </button>
