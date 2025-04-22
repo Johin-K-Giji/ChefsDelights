@@ -4,6 +4,7 @@ const app = express();
 const productRoutes = require("./routes/productRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 const orderRoutes= require("./routes/orderRoutes")
+const authRoutes = require("./routes/authRoutes");
 const path = require("path");
 require("dotenv").config();
 console.log("Key from .env directly:", require("dotenv").config().parsed);
@@ -30,6 +31,7 @@ app.use('/static/products', express.static(path.join(__dirname, 'uploads/product
 app.use("/api/products", productRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/orders",orderRoutes)
+app.use('/api/auth',authRoutes)
 
 app.listen(5000, () => {
   console.log("Server running on port 5000");
