@@ -27,7 +27,7 @@ const BuyPage = () => {
 
   useEffect(() => {
     const stateProducts = location.state?.products;
-    console.log(products); 
+    console.log("log",products); 
 
     if (stateProducts && Array.isArray(stateProducts)) {
       setProducts(stateProducts);
@@ -134,6 +134,9 @@ const BuyPage = () => {
           totalAmount,
           productIds,
         });
+
+        console.log("idss:",productIds);
+        
 
         if (verifyRes.data.success) {
 
