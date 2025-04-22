@@ -4,6 +4,7 @@ import Button from "./Button";
 import { useCart } from "../context/CartContext";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import cornImage from "../images/Corn.png";
 
 const ProductComponent = ({ products }) => {
   const [viewMode, setViewMode] = useState("list");
@@ -68,7 +69,7 @@ const ListView = ({ product }) => {
           {product.subImages.map((img, index) => (
             <img
               key={index}
-              src={`https://chefsdelights.onrender.com/static/products/${img}`}
+              src={`https://chefsdelights.onrender.com/static/products/${img}` || cornImage}
               alt={`Sub-image of ${product.name}`}
               onClick={() => setMainImage(`https://chefsdelights.onrender.com/static/products/${img}`)}
               className="w-9 h-9 sm:w-12 sm:h-12 object-cover rounded-md cursor-pointer hover:ring-2 hover:ring-orange-500 transition"
