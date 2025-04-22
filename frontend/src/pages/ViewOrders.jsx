@@ -21,9 +21,21 @@ const ViewOrders = () => {
       });
   };
 
-  const filteredOrders = orders.filter(order =>
-    order.userName.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredOrders = orders.filter(order => {
+    const query = searchQuery.toLowerCase();
+    return (
+      order.userName.toLowerCase().includes(query) ||
+      order.transactionId?.toLowerCase().includes(query)
+    );
+  });
+  
+  
+  const sortedOrders = [...filteredOrders].sort((a, b) => {
+    if (a.status === 1 && b.status !== 1) return 1;
+    if (a.status !== 1 && b.status === 1) return -1;
+    return new Date(a.createdAt) - new Date(b.createdAt);
+  });
+  
 
   const handleStatusUpdate = (orderId) => {
     axios.put('https://chefsdelights.onrender.com/api/orders/update-order', { orderId })
@@ -73,7 +85,7 @@ const ViewOrders = () => {
             </thead>
             <tbody>
               {filteredOrders.length > 0 ? (
-                filteredOrders.map((order, index) => (
+                sortedOrders.map((order, index) => (
                   <tr key={order._id || index} className="border-b hover:bg-gray-50">
                     <td className="p-4 text-gray-700">{index + 1}</td>
                     <td className="p-4 text-gray-700">{order.userName}</td>
