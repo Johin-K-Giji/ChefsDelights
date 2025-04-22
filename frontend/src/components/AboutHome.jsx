@@ -1,5 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import Logo from "../images/Logo.png";
+import {
+  FiPackage,
+  FiShield,
+  FiClipboard,
+  FiClock,
+  FiLock,
+  FiTruck
+} from "react-icons/fi";
+import { FaLeaf } from "react-icons/fa"; // For eco-friendly (from FontAwesome)
+
+
+
 
 const reviews = [
   { id: 1, text: "Absolutely loved it! The best puttu mix I've tried.", name: "Anjali", place: "Kochi" },
@@ -86,14 +98,37 @@ const AboutHome = () => {
             </div>
           )}
 
-          {activeTab === "package" && (
-            <div className="text-white text-sm md:text-base space-y-4">
-              <p><strong>Authentic:</strong> All our products follow traditional recipes from Kerala, ensuring each pack delivers genuine regional flavor.</p>
-              <p><strong>Affordable:</strong> We believe everyone should have access to healthy, tasty food. Our pricing is fair and inclusive.</p>
-              <p><strong>Quality:</strong> We carefully select high-quality ingredients and maintain strict hygiene standards during production and packaging.</p>
-              <p><strong>Natural:</strong> No artificial preservatives or colors. Just pure, wholesome ingredients you can trust.</p>
-            </div>
-          )}
+{activeTab === "package" && (
+  <div className="text-white text-sm md:text-base grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="flex items-start gap-3">
+      <FiPackage className="text-yellow-300 mt-1" size={24} />
+      <p><strong>Airtight Sealing:</strong> Each pack is vacuum-sealed to lock in freshness and preserve authentic flavor for longer periods.</p>
+    </div>
+    <div className="flex items-start gap-3">
+      <FiShield className="text-blue-300 mt-1" size={24} />
+      <p><strong>Hygienic Handling:</strong> Our packaging is done in sanitized environments ensuring safety from production to doorstep.</p>
+    </div>
+    <div className="flex items-start gap-3">
+      <FaLeaf className="text-green-400 mt-1" size={22} />
+      <p><strong>Eco-Friendly:</strong> We use recyclable and biodegradable packaging materials to care for the environment.</p>
+    </div>
+    <div className="flex items-start gap-3">
+      <FiClipboard className="text-pink-300 mt-1" size={24} />
+      <p><strong>Clear Labeling:</strong> All packages come with complete ingredient details, expiry dates, and nutritional info.</p>
+    </div>
+    <div className="flex items-start gap-3">
+      <FiClock className="text-purple-300 mt-1" size={24} />
+      <p><strong>Long Shelf Life:</strong> Advanced moisture control ensures extended shelf life without compromising taste.</p>
+    </div>
+    <div className="flex items-start gap-3">
+      <FiLock className="text-red-300 mt-1" size={24} />
+      <p><strong>Tamper-Proof:</strong> Security-sealed pouches guarantee product safety during transit and delivery.</p>
+    </div>
+  </div>
+)}
+
+
+
         </div>
       </div>
 
