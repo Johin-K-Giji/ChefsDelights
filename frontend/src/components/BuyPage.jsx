@@ -110,8 +110,7 @@ const BuyPage = () => {
 
     // Create order on backend
     const orderResponse = await axios.post("https://chefsdelights.onrender.com/api/payment/create-order/", {
-      amount: totalAmount * 100, // in paise,
-      productIds,
+      amount: totalAmount * 100, // in paise
     });
 
     const { amount, id: order_id, currency } = orderResponse.data;
@@ -133,6 +132,7 @@ const BuyPage = () => {
           ...response,
           orderDetails: form,
           totalAmount,
+          productIds,
         });
 
         console.log("idss:",productIds);

@@ -2,6 +2,7 @@ require("dotenv").config();
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
 const Order = require("../models/Order");
+const { log } = require("console");
 
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -95,6 +96,7 @@ const createOrder = async (req, res) => {
 
 // Separate Verify API if needed externally
 const verifyPayment = async (req, res) => {
+  
   const {
     razorpay_order_id,
     razorpay_payment_id,
@@ -103,6 +105,7 @@ const verifyPayment = async (req, res) => {
     totalAmount,
     paymentMode,
     transactionId,
+    productIds
   } = req.body;
 
   const isValid = verifyRazorpaySignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
@@ -130,6 +133,7 @@ const verifyPayment = async (req, res) => {
       razorpaySignature: razorpay_signature,
       transactionId: transactionId || razorpay_payment_id,
       paymentMode: paymentMode || "Online",
+      productIds
     });
 
     await newOrder.save();
