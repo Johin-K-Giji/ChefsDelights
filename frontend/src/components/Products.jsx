@@ -68,12 +68,17 @@ const ListView = ({ product }) => {
         <div className="mt-3 flex flex-wrap gap-2">
           {product.subImages.map((img, index) => (
             <img
-              key={index}
-              src={`https://chefsdelights.onrender.com/static/products/${img}` || cornImage}
-              alt={`Sub-image of ${product.name}`}
-              onClick={() => setMainImage(`https://chefsdelights.onrender.com/static/products/${img}`)}
-              className="w-9 h-9 sm:w-12 sm:h-12 object-cover rounded-md cursor-pointer hover:ring-2 hover:ring-orange-500 transition"
-            />
+            key={index}
+            src={`https://chefsdelights.onrender.com/static/products/${img}`}
+            alt={`Sub-image of ${product.name}`}
+            onClick={() => setMainImage(`https://chefsdelights.onrender.com/static/products/${img}`)}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = cornImage;
+            }}
+            className="w-9 h-9 sm:w-12 sm:h-12 object-cover rounded-md cursor-pointer hover:ring-2 hover:ring-orange-500 transition"
+          />
+          
           ))}
         </div>
 
