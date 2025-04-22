@@ -8,21 +8,28 @@ module.exports = {
       fontFamily: {
         instrument: ["Instrument Serif", "serif"],
       },
+      keyframes: {
+        bounceSlow: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
+      },
+      animation: {
+        bounceSlow: 'bounceSlow 2s infinite',
+      },
     },
   },
   plugins: [
     function ({ addUtilities }) {
       addUtilities({
         '.scrollbar-hide': {
-          /* Hide scrollbar for Chrome, Safari and Opera */
           '&::-webkit-scrollbar': {
             display: 'none',
           },
-          /* Hide scrollbar for IE, Edge and Firefox */
-          '-ms-overflow-style': 'none', /* IE and Edge */
-          'scrollbar-width': 'none',    /* Firefox */
+          '-ms-overflow-style': 'none',
+          'scrollbar-width': 'none',
         },
-      })
+      });
     },
   ],
 };

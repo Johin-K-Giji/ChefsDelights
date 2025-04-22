@@ -35,8 +35,8 @@ const Footer = () => {
           {/* Contact */}
           <div className="flex flex-col items-center min-w-[100px]">
             <h3 className="font-semibold mb-1 text-sm">Contact</h3>
-            <p>+91 9632451125</p>
-            <p>+91 9632451125</p>
+            <p>+91 9447580543</p>
+            <p>+971 545016864</p>
           </div>
         </div>
 

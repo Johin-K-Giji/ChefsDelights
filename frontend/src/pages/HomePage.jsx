@@ -67,6 +67,24 @@ const Home = () => {
       </Suspense>
 
       {/* Footer */}
+
+      {/* WhatsApp Floating Icon */}
+{/* WhatsApp Floating Icon (Visible on all screens including mobile) */}
+<a
+  href="https://wa.me/918547730543"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="fixed bottom-6 right-6 z-50 animate-bounceSlow"
+  data-aos="zoom-in"
+>
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png"
+    alt="WhatsApp Chat"
+    className="w-12 h-12 md:w-16 md:h-16 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+  />
+</a>
+
+
       <Footer />
     </div>
   );
