@@ -53,7 +53,15 @@ const ListView = ({ product }) => {
   return (
     <div className="bg-white p-4 sm:p-5 rounded-lg shadow flex flex-col sm:flex-row items-center w-full sm:w-[90%] min-h-[350px]">
       <div className="w-full sm:w-1/3 flex justify-center h-[180px] sm:h-[300px] mb-4 sm:mb-0">
-        <img src={mainImage} alt={product.name} className="h-full object-contain" />
+      <img
+  src={mainImage}
+  alt={product.name}
+  onError={(e) => {
+    e.target.onerror = null; // Prevent infinite loop if fallback fails
+    e.target.src = cornImage;
+  }}
+  className="h-full object-contain"
+/>
       </div>
 
       <div className="w-full sm:w-2/3 sm:pl-6 text-left">

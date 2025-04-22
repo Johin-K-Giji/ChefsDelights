@@ -24,6 +24,7 @@ const Login = () => {
 navigate("/admin");
     } catch (err) {
       setMessage(err.response?.data?.message || "Login failed");
+      
     }
   };
 
