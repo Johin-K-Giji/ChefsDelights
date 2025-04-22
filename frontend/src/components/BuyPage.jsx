@@ -118,10 +118,14 @@ const BuyPage = () => {
       order_id,
       handler: async (response) => {
         // Send payment success data to backend
+
+        const productIds = products.map((item) => item._id); // Extract product IDs
+
         const verifyRes = await axios.post("https://chefsdelights.onrender.com/api/payment/verify-payment", {
           ...response,
           orderDetails: form,
           totalAmount,
+          productIds,
         });
 
         if (verifyRes.data.success) {

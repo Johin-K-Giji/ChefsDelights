@@ -5,6 +5,7 @@ const orderSchema = new mongoose.Schema({
   phone: String,
   address: String,
   orderAmount: Number,
+  productIds: [String], // <-- Add this line
   razorpayPaymentId: String,
   razorpayOrderId: String,
   razorpaySignature: String,
