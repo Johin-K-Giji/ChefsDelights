@@ -11,7 +11,8 @@ const BuyPage = () => {
 
   const [products, setProducts] = useState([]); // Can hold one or multiple products
 
-  const [product, setProduct] = useState(null);
+  const [productIds, setProductIds] = useState([]); // State to store product IDs
+  
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -30,6 +31,7 @@ const BuyPage = () => {
 
     if (stateProducts && Array.isArray(stateProducts)) {
       setProducts(stateProducts);
+      setProductIds(stateProducts.map((item) => item._id));
     } else if (productId) {
       // fetch single product
       const fetchProduct = async () => {
@@ -37,6 +39,7 @@ const BuyPage = () => {
           const response = await axios.get(`https://chefsdelights.onrender.com/api/products/${productId}`);
           if (response.data) {
             setProducts([response.data]); // Wrap in array for consistency
+            setProductIds([response.data._id]);
           }
         } catch (error) {
           console.error("Error fetching product:", error?.response?.data || error.message);
@@ -102,6 +105,9 @@ const BuyPage = () => {
       return;
     }
 
+
+    
+
     // Create order on backend
     const orderResponse = await axios.post("https://chefsdelights.onrender.com/api/payment/create-order/", {
       amount: totalAmount * 100, // in paise
@@ -120,8 +126,7 @@ const BuyPage = () => {
       handler: async (response) => {
         // Send payment success data to backend
 
-        const productIds = products.map((item) => item._id); // Extract product IDs
-        console.log("Product Id",productIds)
+
 
         const verifyRes = await axios.post("https://chefsdelights.onrender.com/api/payment/verify-payment", {
           ...response,
