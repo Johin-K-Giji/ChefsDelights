@@ -113,6 +113,7 @@ const ListView = ({ product }) => {
 
 // Grid View
 const GridView = ({ product }) => {
+  const [mainImage, setMainImage] = useState(`https://chefsdelights.onrender.com/static/products/${product.coverImage}`);
   const { addToCart } = useCart();
 
   return (
@@ -122,7 +123,7 @@ const GridView = ({ product }) => {
   src={mainImage}
   alt={product.name}
   onError={(e) => {
-    e.target.onerror = null; // Prevent infinite loop if fallback fails
+    e.target.onerror = null;
     e.target.src = cornImage;
   }}
   className="h-full object-contain"
