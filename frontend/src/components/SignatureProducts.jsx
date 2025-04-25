@@ -8,22 +8,22 @@ import cornImage from "../images/Corn.png";
 const products = [
   {
     id: 1,
-    name: "Carrot Puttupodi",
-    price: "₹ 150/500g",
+    name: "Banana Puttupodi",
+    price: "₹ 135/500g",
     image: banannaImage,
     bgColor: "bg-[#E9F5C9]",
   },
   {
     id: 2,
     name: "Beetroot Puttupodi",
-    price: "₹ 100/500g",
+    price: "₹ 125/500g",
     image: beetrootImage,
     bgColor: "bg-[#FDE3C8]",
   },
   {
     id: 3,
-    name: "Chocolate Puttupodi",
-    price: "₹ 200/500g",
+    name: "Corn Puttupodi",
+    price: "₹ 90/500g",
     image: cornImage,
     bgColor: "bg-[#FDE3C8]",
   },
