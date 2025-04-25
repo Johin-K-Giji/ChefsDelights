@@ -5,12 +5,12 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { FiChevronDown } from "react-icons/fi";
 import Button from "./Button";
-import BetrootDC from "../images/BetrootDC.png";
-import CarrotDC from "../images/CarrotDC.png";
-import CornDC from "../images/CornDC.png";
-import CornMC from "../images/CornMC.png";
-import CarrotMC from "../images/CarrotMC.png";
-import ChocolateMC from "../images/ChocolateMC.png";
+import BetrootDC from "../images/BetrootDC.webp";
+import CarrotDC from "../images/CarrotDC.webp";
+import ChocolateDC from "../images/ChocolateDC.webp";
+import CarrotMC from "../images/CarrotMC.webp";
+import ChocolateMC from "../images/ChocolateMC.webp";
+import BetrootMC from "../images/BetrootMC.webp";
 import { Link } from "react-router-dom";
 
 const slides = [
@@ -19,21 +19,21 @@ const slides = [
     title: "CARROT",
     subtitle: "Puttupodi",
     desktopImage: BetrootDC,
-    mobileImage: CarrotMC,
+    mobileImage: BetrootMC,
   },
   {
     id: 2,
     title: "RAGI",
     subtitle: "Puttupodi",
     desktopImage: CarrotDC,
-    mobileImage: ChocolateMC,
+    mobileImage: CarrotMC,
   },
   {
     id: 3,
     title: "WHEAT",
     subtitle: "Puttupodi",
-    desktopImage: CornDC,
-    mobileImage: CornMC,
+    desktopImage: ChocolateDC,
+    mobileImage: ChocolateMC,
   },
 ];
 

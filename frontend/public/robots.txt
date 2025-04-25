@@ -1,3 +1,6 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /add-product/
+Disallow: /view-product/
+Disallow: /view-orders/
+Sitemap: https://chefdelightsfoods.com/sitemap.xml

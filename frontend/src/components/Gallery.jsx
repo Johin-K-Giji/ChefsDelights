@@ -2,10 +2,9 @@
 import bananaImage from "../images/Bananna.png";
 import beetrootImage from "../images/Beetroot.png";
 import cornImage from "../images/Corn.png";
-import BetrootDC from "../images/BetrootDC.png";
-import CarrotDC from "../images/CarrotDC.png";
-import CornDC from "../images/CornDC.png";
-import CornMC from "../images/CornMC.png";
+import BetrootDC from "../images/BetrootDC.webp";
+import CarrotDC from "../images/CarrotDC.webp";
+import ChocolateMC from "../images/ChocolateMC.webp";
 
 
 const galleryImages = [
