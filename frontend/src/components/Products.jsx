@@ -47,7 +47,7 @@ const ProductComponent = ({ products }) => {
 
 // List View
 const ListView = ({ product }) => {
-  const [mainImage, setMainImage] = useState(`https://chefsdelights.onrender.com/static/products/${product.coverImage}`);
+  const [mainImage, setMainImage] = useState(`https://www.chefsdelights.com/static/products/${product.coverImage}`);
   const { addToCart } = useCart();
 
   return (
@@ -77,9 +77,9 @@ const ListView = ({ product }) => {
           {product.subImages.map((img, index) => (
             <img
             key={index}
-            src={`https://chefsdelights.onrender.com/static/products/${img}`}
+            src={`https://www.chefsdelights.com/static/products/${img}`}
             alt={`Sub-image of ${product.name}`}
-            onClick={() => setMainImage(`https://chefsdelights.onrender.com/static/products/${img}`)}
+            onClick={() => setMainImage(`https://www.chefsdelights.com/static/products/${img}`)}
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = cornImage;
@@ -113,7 +113,7 @@ const ListView = ({ product }) => {
 
 // Grid View
 const GridView = ({ product }) => {
-  const [mainImage, setMainImage] = useState(`https://chefsdelights.onrender.com/static/products/${product.coverImage}`);
+  const [mainImage, setMainImage] = useState(`https://www.chefsdelights.com/static/products/${product.coverImage}`);
   const { addToCart } = useCart();
 
   return (
